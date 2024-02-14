@@ -36,8 +36,8 @@ def remove_incomplete_days(data, timestamps, T=48):
 
 def load_stdata(fname):
     f = h5py.File(fname, 'r')
-    data = f['data'].value
-    timestamps = f['date'].value
+    data = f['data'][:]
+    timestamps = f['date'][:]
     f.close()
     return data, timestamps
 

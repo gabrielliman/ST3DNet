@@ -1,21 +1,56 @@
+# from keras.layers import (
+#     Input,
+#     Activation,
+#     Dense,
+#     Reshape
+# )
+# import keras
+# from keras.layers import Conv2D
+# from keras.layers import BatchNormalization
+# from keras.models import Model
+# from keras.layers import Conv3D
+# from keras.engine import Layer
+# import numpy as np
+# from keras import backend as K
+# import tensorflow as tf
+
+
 from keras.layers import (
     Input,
+    Layer,
     Activation,
     Dense,
-    Reshape
+    Reshape,
+    Conv2D,
+    BatchNormalization,
+    Conv3D
 )
-import keras
-from keras.layers.convolutional import Convolution2D
-from keras.layers.normalization import BatchNormalization
 from keras.models import Model
-from keras.layers.convolutional import Conv3D
-from keras.engine.topology import Layer
 import numpy as np
 from keras import backend as K
 import tensorflow as tf
+import keras
 
 
 K.set_image_data_format('channels_first')
+
+# class iLayer(Layer):
+#     '''
+#     final weighted sum
+#     '''
+#     def __init__(self, **kwargs):
+#         super(iLayer, self).__init__(**kwargs)
+
+#     def build(self, input_shape):
+#         initial_weight_value = np.random.random(input_shape[1:])
+#         self.W = K.variable(initial_weight_value)
+#         self.trainable_weights = [self.W]
+
+#     def call(self, x, mask=None):
+#         return x * self.W
+
+#     def get_output_shape_for(self, input_shape):
+#         return input_shape
 
 class iLayer(Layer):
     '''
@@ -26,30 +61,44 @@ class iLayer(Layer):
 
     def build(self, input_shape):
         initial_weight_value = np.random.random(input_shape[1:])
-        self.W = K.variable(initial_weight_value)
-        self.trainable_weights = [self.W]
+        self.W = self.add_weight(shape=input_shape[1:],
+                                 initializer='random_normal',
+                                 trainable=True,
+                                 name='ilayer_weight')
+        super(iLayer, self).build(input_shape)
 
     def call(self, x, mask=None):
         return x * self.W
 
-    def get_output_shape_for(self, input_shape):
+    def compute_output_shape(self, input_shape):
         return input_shape
+
 
 class Recalibration(Layer):
     '''
     channel-wise recalibration for closeness component
     '''
+    # def __init__(self, **kwargs):
+    #     super(Recalibration, self).__init__(**kwargs)
+
+    # def build(self, input_shape):
+    #     '''
+    #     input_shape: (batch, c,h,w)
+    #     '''
+    #     initial_weight_value = np.random.random((input_shape[1], 2, input_shape[2], input_shape[3])) # (c,2,h,w)
+    #     self.W = K.variable(initial_weight_value)
+    #     self.trainable_weights = [self.W]
+
+    #     super(Recalibration, self).build(input_shape)
     def __init__(self, **kwargs):
         super(Recalibration, self).__init__(**kwargs)
 
     def build(self, input_shape):
-        '''
-        input_shape: (batch, c,h,w)
-        '''
-        initial_weight_value = np.random.random((input_shape[1], 2, input_shape[2], input_shape[3])) # (c,2,h,w)
-        self.W = K.variable(initial_weight_value)
-        self.trainable_weights = [self.W]
-
+        initial_weight_value = np.random.random((input_shape[1], 2, input_shape[2], input_shape[3]))
+        self.W = self.add_weight(shape=(input_shape[1], 2, input_shape[2], input_shape[3]),
+                                 initializer='random_normal',
+                                 trainable=True,
+                                 name='recalibration_weight')
         super(Recalibration, self).build(input_shape)
 
     def call(self, x):
@@ -66,19 +115,31 @@ class Recalibration_T(Layer):
     '''
     channel-wise recalibration for weekly period component:
     '''
-    def __init__(self,channel,**kwargs):
+    # def __init__(self,channel,**kwargs):
+    #     super(Recalibration_T, self).__init__(**kwargs)
+    #     self.channel = channel
+
+    # def build(self, input_shape):
+    #     '''
+    #     input_shape: (batch, c, h, w)
+    #     '''
+    #     initial_weight_value = np.random.random(input_shape[1]*2) # [2c,]:because output 2 channel
+    #     self.W = K.variable(initial_weight_value)
+    #     self.trainable_weights = [self.W]
+
+    #     super(Recalibration_T, self).build(input_shape)
+    def __init__(self, channel, **kwargs):
         super(Recalibration_T, self).__init__(**kwargs)
         self.channel = channel
 
     def build(self, input_shape):
-        '''
-        input_shape: (batch, c, h, w)
-        '''
-        initial_weight_value = np.random.random(input_shape[1]*2) # [2c,]:because output 2 channel
-        self.W = K.variable(initial_weight_value)
-        self.trainable_weights = [self.W]
-
+        initial_weight_value = np.random.random(input_shape[1] * 2)
+        self.W = self.add_weight(shape=(input_shape[1] * 2,),
+                                 initializer='random_normal',
+                                 trainable=True,
+                                 name='recalibration_t_weight')
         super(Recalibration_T, self).build(input_shape)
+
 
     def call(self, x):
         '''
@@ -106,7 +167,7 @@ def _bn_relu_conv(nb_filter, nb_row, nb_col, subsample=(1, 1), bn=False):
         if bn:
             input = BatchNormalization(mode=0, axis=1)(input)
         activation = Activation('relu')(input)
-        return Convolution2D(nb_filter=nb_filter, nb_row=nb_row, nb_col=nb_col, subsample=subsample, border_mode="same")(activation)
+        return Conv2D(filters=nb_filter, kernel_size=(nb_row, nb_col), strides=subsample, padding="same")(activation)
     return f
 
 
@@ -135,16 +196,16 @@ def ST3DNet(c_conf=(6, 2, 16, 8), t_conf=(4, 2, 16, 8), external_dim=8, nb_resid
         input = Input(shape=(nb_flow, len_closeness, map_height, map_width))  # (2,t_c,h,w)
         main_inputs.append(input)
         # Conv1 3D
-        conv = Conv3D(filters=64, kernel_size=(6, 3, 3), strides=(1, 1, 1), border_mode="same",
+        conv = Conv3D(filters=64, kernel_size=(6, 3, 3), strides=(1, 1, 1), padding="same",
                       kernel_initializer='random_uniform')(input)
         conv = Activation("relu")(conv)
 
         # Conv2 3D
-        conv = Conv3D(filters=64, kernel_size=(3, 3, 3), strides=(3, 1, 1), border_mode="same")(conv)
+        conv = Conv3D(filters=64, kernel_size=(3, 3, 3), strides=(3, 1, 1), padding="same")(conv)
         conv = Activation("relu")(conv)
 
         # Conv3 3D
-        conv = Conv3D(filters=64, kernel_size=(3, 3, 3), strides=(3, 1, 1), border_mode="same")(conv)
+        conv = Conv3D(filters=64, kernel_size=(3, 3, 3), strides=(3, 1, 1), padding="same")(conv)
 
         # (filter,1,height,width)
         reshape = Reshape((64, map_height, map_width))(conv)
@@ -160,7 +221,7 @@ def ST3DNet(c_conf=(6, 2, 16, 8), t_conf=(4, 2, 16, 8), external_dim=8, nb_resid
         input = Input(shape=(nb_flow, len_seq, map_height, map_width))
         main_inputs.append(input)
 
-        conv = Conv3D(nb_filter=8, kernel_dim1=len_seq, kernel_dim2=1, kernel_dim3=1, border_mode="valid")(input)
+        conv = Conv3D(filters=8, kernel_size=(len_seq, 1, 1), padding="valid")(input)
         conv = Activation('relu')(conv)
 
         output_t = Reshape((8, map_height, map_width))(conv)
@@ -193,6 +254,5 @@ def ST3DNet(c_conf=(6, 2, 16, 8), t_conf=(4, 2, 16, 8), external_dim=8, nb_resid
         print('external_dim:', external_dim)
 
     main_output = Activation('relu')(main_output)
-    model = Model(input=main_inputs, output=main_output)
-
+    model = Model(inputs=main_inputs, outputs=main_output)
     return model

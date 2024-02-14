@@ -67,7 +67,7 @@ model_checkpoint = ModelCheckpoint(fname_param, monitor='val_rmse', verbose=0, s
 print('=' * 10)
 print("training model...")
 history = model.fit(X_train, Y_train,
-                    nb_epoch=nb_epoch,
+                    epochs=nb_epoch,
                     batch_size=batch_size,
                     validation_split=0.1,
                     callbacks=[early_stopping, model_checkpoint],
@@ -88,7 +88,7 @@ print('=' * 10)
 print("training model (cont)...")
 fname_param = os.path.join('MODEL', '{}.cont.best.h5'.format(hyperparams_name))
 model_checkpoint = ModelCheckpoint(fname_param, monitor='rmse', verbose=0, save_best_only=True, mode='min')
-history = model.fit(X_train, Y_train, nb_epoch=nb_epoch_cont, verbose=1, batch_size=batch_size, callbacks=[model_checkpoint], validation_data=(X_test, Y_test))
+history = model.fit(X_train, Y_train, epochs=nb_epoch_cont, verbose=1, batch_size=batch_size, callbacks=[model_checkpoint], validation_data=(X_test, Y_test))
 model.save_weights('{}_cont.h5'.format(hyperparams_name), overwrite=True)
 
 print('=' * 10)
