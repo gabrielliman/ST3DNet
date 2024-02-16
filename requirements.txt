@@ -1,0 +1,8 @@
+# requirements.txt
+
+#ST3DNet
+#pickle
+keras
+tensorflow
+pandas
+numpy
