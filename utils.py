@@ -1,4 +1,6 @@
 from keras import backend as K
+import tensorflow as tf
+import numpy as np
 
 
 class MinMaxNormalization(object):
@@ -34,3 +36,12 @@ def mean_squared_error(y_true, y_pred):
 
 def rmse(y_true, y_pred):
     return mean_squared_error(y_true, y_pred) ** 0.5
+
+
+def mae(actual, predicted):
+    mae = tf.reduce_mean(tf.abs(actual - predicted))
+    return mae
+
+def mape(actual, predicted):
+    mape = tf.reduce_mean(tf.abs((actual - predicted) / (actual))) * 100
+    return mape
