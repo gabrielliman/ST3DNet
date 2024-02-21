@@ -1,0 +1,19 @@
+
+REFERENCIA BIKE 
+ RMSE: 5.80, MAE: 3.43, MAPE: 0.42
+==========
+evaluating using the model that has the best loss on the valid set
+Train score: 21.977720 
+    RMSE (real): 5.849128 MAE (real): 2.603320 MAPE (real): nan 
+    RMSE: 4.652953 MAE: 2.070928 MAPE: nan
+Test score: 32.300850  
+    RMSE (real): 7.144460 MAE (real): 3.109391 MAPE (real): nan 
+    RMSE: 5.683383 MAE: 2.473505 MAPE: nan
+==========
+evaluating using the final model
+Train score: 18.366518  
+    RMSE (real): 5.350982 MAE (real): 2.430908 MAPE (real): nan 
+    RMSE: 4.256680 MAE: 1.933775 MAPE: nan
+Test score: 30.449446  
+    RMSE (real): 6.936688 MAE (real): 3.047458 MAPE (real): nan 
+    RMSE: 5.518102 MAE: 2.424238 MAPE: nan
