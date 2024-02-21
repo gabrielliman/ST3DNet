@@ -8,6 +8,8 @@ from keras.optimizers import Adam
 from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
 
+file=open("resultados3.txt", "w")
+
 config = ConfigProto()
 config.gpu_options.allow_growth = True
 session = InteractiveSession(config=config)
@@ -39,8 +41,6 @@ external_dim = pickle.load(f)
 timestamp_train = pickle.load(f)
 timestamp_test = pickle.load(f)
 
-for i in X_train:
-    print(i.shape)
 
 Y_train = mmn.inverse_transform(Y_train)  # X is MaxMinNormalized, Y is real value
 Y_test = mmn.inverse_transform(Y_test)
@@ -74,39 +74,39 @@ history = model.fit(X_train, Y_train,
                     verbose=1)
 
 model.save_weights('{}.h5'.format(hyperparams_name), overwrite=True)
-print('=' * 10)
-print('evaluating using the model that has the best loss on the valid set')
+file.write('=' * 10)
+file.write('evaluating using the model that has the best loss on the valid set')
 model.load_weights(fname_param)
 
 score = model.evaluate(X_train, Y_train, batch_size=Y_train.shape[0] // 48, verbose=0)
 
-print('Train score:\n %.6f  RMSE (real): %.6f MAE (real): %.6f MAPE (real): %.6f \nRMSE: %.6f MAE: %.6f MAPE: %.6f' %
+file.write('Train score: %.6f\n  RMSE (real): %.6f\n MAE (real): %.6f\n MAPE (real): %.6f\n RMSE: %.6f\n MAE: %.6f\n MAPE: %.6f\n' %
        (score[0], score[1] * m_factor, score[2] * m_factor, score[3] * m_factor,score[1], score[2], score[3]))
 
 score = model.evaluate(X_test, Y_test, batch_size=Y_test.shape[0], verbose=0)
 
-print('Test score:\n %.6f  RMSE (real): %.6f MAE (real): %.6f MAPE (real): %.6f \nRMSE: %.6f MAE: %.6f MAPE: %.6f' %
+file.write('Test score: %.6f\n  RMSE (real): %.6f\n MAE (real): %.6f\n MAPE (real): %.6f\n \nRMSE: %.6f\n MAE: %.6f\n MAPE: %.6f\n' %
        (score[0], score[1] * m_factor, score[2] * m_factor, score[3] * m_factor,score[1], score[2], score[3]))
 
 
 
 
-print('=' * 10)
-print("training model (cont)...")
+file.write('=' * 10)
+file.write("training model (cont)...")
 fname_param = os.path.join('MODEL', '{}.cont.best.h5'.format(hyperparams_name))
 model_checkpoint = ModelCheckpoint(fname_param, monitor='rmse', verbose=0, save_best_only=True, mode='min')
 history = model.fit(X_train, Y_train, epochs=nb_epoch_cont, verbose=1, batch_size=batch_size, callbacks=[model_checkpoint], validation_data=(X_test, Y_test))
 model.save_weights('{}_cont.h5'.format(hyperparams_name), overwrite=True)
 
-print('=' * 10)
-print('evaluating using the final model')
+file.write('=' * 10)
+file.write('evaluating using the final model')
 
 score = model.evaluate(X_train, Y_train, batch_size=Y_train.shape[0] // 48, verbose=0)
 
-print('Train score:\n %.6f  RMSE (real): %.6f MAE (real): %.6f MAPE (real): %.6f \nRMSE: %.6f MAE: %.6f MAPE: %.6f' %
+file.write('Train score: %.6f\n  RMSE (real): %.6f\n MAE (real): %.6f\n MAPE (real): %.6f\n \nRMSE: %.6f\n MAE: %.6f\n MAPE: %.6f\n' %
        (score[0], score[1] * m_factor, score[2] * m_factor, score[3] * m_factor,score[1], score[2], score[3]))
 
 score = model.evaluate(X_test, Y_test, batch_size=Y_test.shape[0], verbose=0)
 
-print('Test score:\n %.6f  RMSE (real): %.6f MAE (real): %.6f MAPE (real): %.6f \nRMSE: %.6f MAE: %.6f MAPE: %.6f' %
+file.write('Test score: %.6f\n  RMSE (real): %.6f\n MAE (real): %.6f\n MAPE (real): %.6f\n \nRMSE: %.6f\n MAE: %.6f\n MAPE: %.6f\n' %
        (score[0], score[1] * m_factor, score[2] * m_factor, score[3] * m_factor,score[1], score[2], score[3]))
