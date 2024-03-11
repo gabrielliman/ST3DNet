@@ -1,0 +1,13 @@
+Grupos no arquivo (result)c6.p0.t4.resunit4.lr2e-05.best.h5:
+model_weights
+optimizer_weights
+
+Conjuntos de dados no nível raiz:
+
+Explorando o conjunto de dados: model_weights
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280259888>
+
+Explorando o conjunto de dados: optimizer_weights
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>

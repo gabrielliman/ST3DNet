@@ -41,7 +41,7 @@ timestamp_test = pickle.load(f)
 
 for i in X_train:
     print(i.shape)
-
+    
 Y_train = mmn.inverse_transform(Y_train)  # X is MaxMinNormalized, Y is real value
 Y_test = mmn.inverse_transform(Y_test)
 

@@ -1,0 +1,38 @@
+==========evaluating using the model that has the best loss on the valid set
+
+Train score: 1.176355
+
+RMSE (real): 1.363854
+MAE (real): 0.692650
+MAPE (real): nan
+RMSE: 1.084939
+MAE: 0.551000
+MAPE: nan
+
+Test score: 1.183739
+
+RMSE (real): 1.367699
+MAE (real): 0.690268
+MAPE (real): nan 
+RMSE: 1.087998
+MAE: 0.549105
+MAPE: nan
+==========training model (cont)...==========evaluating using the final model
+
+Train score: 1.165922
+
+RMSE (real): 1.357870
+MAE (real): 0.694061
+MAPE (real): nan
+RMSE: 1.080179
+MAE: 0.552122
+MAPE: nan
+
+Test score: 1.175402
+
+RMSE (real): 1.362874
+MAE (real): 0.691376
+MAPE (real): nan
+RMSE: 1.084160
+MAE: 0.549986
+MAPE: nan

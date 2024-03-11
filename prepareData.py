@@ -6,7 +6,7 @@ import numpy as np
 import h5py
 import time
 from utils import *
-
+# from crime_data import load_crime
 
 def remove_incomplete_days(data, timestamps, T=48):
     # remove a certain day which has not 48 timestamps
@@ -39,7 +39,9 @@ def load_stdata(fname):
     data = f['data'][:]
     timestamps = f['date'][:]
     f.close()
+    # data, timestamps=load_crime()
     return data, timestamps
+
 
 
 def string2timestamp(strings, T=48):

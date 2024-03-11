@@ -8,7 +8,7 @@ from keras.optimizers import Adam
 from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
 
-file=open("resultados3.txt", "w")
+file=open("resultados_crime.txt", "w")
 
 config = ConfigProto()
 config.gpu_options.allow_growth = True

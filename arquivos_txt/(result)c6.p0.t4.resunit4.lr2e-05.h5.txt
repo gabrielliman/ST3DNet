@@ -1,0 +1,193 @@
+Grupos no arquivo (result)c6.p0.t4.resunit4.lr2e-05.h5:
+activation
+activation_1
+activation_10
+activation_11
+activation_2
+activation_3
+activation_4
+activation_5
+activation_6
+activation_7
+activation_8
+activation_9
+add
+add_1
+add_2
+add_3
+add_4
+conv2d
+conv2d_1
+conv2d_2
+conv2d_3
+conv2d_4
+conv2d_5
+conv2d_6
+conv2d_7
+conv3d
+conv3d_1
+conv3d_2
+conv3d_3
+i_layer
+i_layer_1
+input_1
+input_2
+recalibration
+recalibration_t
+reshape
+reshape_1
+top_level_model_weights
+
+Conjuntos de dados no nível raiz:
+
+Explorando o conjunto de dados: activation
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: activation_1
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: activation_10
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: activation_11
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: activation_2
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: activation_3
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: activation_4
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: activation_5
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: activation_6
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: activation_7
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: activation_8
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: activation_9
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: add
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: add_1
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: add_2
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: add_3
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: add_4
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: conv2d
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: conv2d_1
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: conv2d_2
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: conv2d_3
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: conv2d_4
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: conv2d_5
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: conv2d_6
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: conv2d_7
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: conv3d
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: conv3d_1
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: conv3d_2
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: conv3d_3
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: i_layer
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: i_layer_1
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: input_1
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: input_2
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: recalibration
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: recalibration_t
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: reshape
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260208>
+
+Explorando o conjunto de dados: reshape_1
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280260048>
+
+Explorando o conjunto de dados: top_level_model_weights
+Informações sobre o conjunto de dados:
+<Attributes of HDF5 object at 140394280259808>
