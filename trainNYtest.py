@@ -88,9 +88,6 @@ score = model.evaluate(X_test, Y_test, batch_size=Y_test.shape[0], verbose=0)
 file.write('Test score: %.6f\n  RMSE (real): %.6f\n MAE (real): %.6f\n MAPE (real): %.6f\n \nRMSE: %.6f\n MAE: %.6f\n MAPE: %.6f\n' %
        (score[0], score[1] * m_factor, score[2] * m_factor, score[3] * m_factor,score[1], score[2], score[3]))
 
-
-
-
 file.write('=' * 10)
 file.write("training model (cont)...")
 fname_param = os.path.join('MODEL', '{}.cont.best.h5'.format(hyperparams_name))

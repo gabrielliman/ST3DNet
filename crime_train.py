@@ -17,7 +17,7 @@ session = InteractiveSession(config=config)
 nb_epoch = 1500  # number of epoch at training stage
 nb_epoch_cont = 20  # number of epoch at training (cont) stage
 batch_size = 32  # batch size
-T = 48  # number of time intervals in one day
+T = 24  # number of time intervals in one day
 lr = 0.00002  # learning rate
 len_closeness = 6  # length of closeness dependent sequence
 len_period = 0  # length of peroid dependent sequence
@@ -26,11 +26,12 @@ nb_residual_unit = 4   # number of residual units
 nb_flow = 2  # there are two types of flows: new-flow and end-flow
 days_test = 10  # divide data into two subsets: Train & Test, of which the test set is the last 10 days
 len_test = T * days_test
-map_height, map_width = 16, 8  # grid size
+map_height, map_width = 24,16  # grid size
 nb_area = 81
 m_factor = math.sqrt(1. * map_height * map_width / nb_area)
 
-filename = os.path.join("data", 'crime_c%d_p%d_t%d_noext'%(len_closeness, len_period, len_trend))
+filename = os.path.join("data", 'crime_c%d_p%d_t%d_T%d_noext_test3'%(len_closeness, len_period, len_trend, T))
+
 f = open(filename, 'rb')
 X_train = pickle.load(f)
 Y_train = pickle.load(f)

@@ -33,7 +33,6 @@ def remove_incomplete_days(data, timestamps, T=48):
     timestamps = [timestamps[i] for i in idx]
     return data, timestamps
 
-
 def load_stdata(fname):
     f = h5py.File(fname, 'r')
     data = f['data'][:]
@@ -41,8 +40,6 @@ def load_stdata(fname):
     f.close()
     # data, timestamps=load_crime()
     return data, timestamps
-
-
 
 def string2timestamp(strings, T=48):
     '''
@@ -57,7 +54,6 @@ def string2timestamp(strings, T=48):
         timestamps.append(pd.Timestamp(datetime(year, month, day, hour=int(slot * time_per_slot), minute=(slot % num_per_T) * int(60.0 * time_per_slot))))
 
     return timestamps
-
 
 class STMatrix(object):
     """docstring for STMatrix"""
@@ -215,7 +211,6 @@ class STMatrix(object):
         print("3D matrix - XC shape: ", XC.shape, "XP shape: ", XP.shape, "XT shape: ", XT.shape, "Y shape:", Y.shape)
         return XC, XP, XT, Y, timestamps_Y
 
-
 def timestamp2vec(timestamps):
     # tm_wday range [0, 6], Monday is 0
     vec = [time.strptime(str(t[:8], encoding='utf-8'), '%Y%m%d').tm_wday for t in timestamps]  # python3
@@ -303,7 +298,7 @@ def load_data(filename, T=24, nb_flow=2, len_closeness=None, len_period=None, le
 T = 24  # number of time intervals in one day
 lr = 0.0002  # learning rate
 len_closeness = 6  # length of closeness dependent sequence
-len_period = 0  # length of peroid dependent sequence
+len_period = 0  # length of period dependent sequence
 len_trend = 4  # length of trend dependent sequence
 nb_residual_unit = 4   # number of residual units
 nb_flow = 2  # there are two types of flows: new-flow and end-flow

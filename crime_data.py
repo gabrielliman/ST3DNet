@@ -10,7 +10,6 @@ def read_data():
     df=df.dropna()
     return df
 
-
 def string2binary(strings, T=24):
     '''
     strings: list of strings formatted like ['2018-11-01 00:00:00', '2018-11-01 01:00:00']
@@ -45,10 +44,10 @@ def remove_outliers(df):
     return df
 
 def create_bins(df):
-    bins = pd.cut(df['numero_latitude'], bins=16, include_lowest=True, labels=False)
+    bins = pd.cut(df['numero_latitude'], bins=24, include_lowest=True, labels=False)
     df['Latitude'] = bins
     
-    bins_lon = pd.cut(df['numero_longitude'], bins=8, include_lowest=True, labels=False)
+    bins_lon = pd.cut(df['numero_longitude'], bins=16, include_lowest=True, labels=False)
     df['Longitude'] = bins_lon
 
     return df
@@ -59,7 +58,6 @@ def section_time(df):
 
     # Agrupe os dados em intervalos de 30 minutos
     df['data_hora_inclusao'] = df['data_hora_inclusao'].dt.floor('60T')
-
     df['data_hora_inclusao'] = df['data_hora_inclusao'].dt.strftime('%Y-%m-%d %H:%M:%S')
     
     return df
@@ -75,7 +73,7 @@ def get_arrays_and_timestamps(df):
     timestamps=np.array(timestamps)
 
     crimes_by_timestamp=[]
-    array_shape = (16, 8)
+    array_shape = (24,16)
 
     # Create an array filled with zeros
     for temp_df in lista_dataframes:
@@ -83,7 +81,7 @@ def get_arrays_and_timestamps(df):
             temp_df['Latitude'], 
             temp_df['Longitude'], 
             bins=[array_shape[0], array_shape[1]], 
-            range=[[0, 16], [0, 8]],
+            range=[[0, 24], [0, 16]],
             density=False
         )
         crime_array = crime_array.astype(int)
